@@ -10,7 +10,7 @@ namespace perlin_noise_visualization.src.rendering {
     class Camera {
 
         public Vector3 position = new Vector3(0,1,0), eye = new Vector3(0,0,0), up = new Vector3(0,1,0);
-        float speed = 5;
+        float speed = 15;
         float xRotation, yRotation;
 
         public Scene scene;

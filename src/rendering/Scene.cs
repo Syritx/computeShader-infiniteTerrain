@@ -38,7 +38,7 @@ namespace perlin_noise_visualization.src.rendering {
 
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.ProgramPointSize);
-            GL.ClearColor(0,0,0,1.0f);
+            GL.ClearColor(0.1f,0.1f,0.1f,1.0f);
         }
     }
 }

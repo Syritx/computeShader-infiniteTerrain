@@ -4,6 +4,7 @@ layout (location = 0) in vec2 position;
 layout (location = 1) in vec3 color;
 
 out float seed;
+out float h;
 out float multiplier;
 uniform float s;
 uniform float pointSize;
@@ -13,6 +14,8 @@ uniform mat4 model;
 uniform mat4 projection;
 
 uniform vec3 cameraPosition;
+
+float size = 5;
 
 
 int p[512] = int[512](
@@ -90,8 +93,8 @@ float noise(float x, float y, float z) {
 
 float noiseLayer(int oct, float lac, float per, float x, float y) {
 
-    float frequency = .05,
-          amplitude = 35;
+    float frequency = .02,
+          amplitude = 15;
 
     float n = 0;
 
@@ -104,10 +107,19 @@ float noiseLayer(int oct, float lac, float per, float x, float y) {
 }
 
 void main() {
-    float height = noiseLayer(8, 2, 0.5, (cameraPosition.x/10)+position.x, (cameraPosition.z/10)+position.y);
-    multiplier = height;
+    float height = noiseLayer(15, 2, 0.5, (cameraPosition.x/size)+position.x, (cameraPosition.z/size)+position.y);
+
+    if (height < 0) {
+        multiplier = height+1.5;
+        h = height;
+        height = 0;
+    }
+    else {
+        multiplier = height;
+    }
+
 
     seed = s;
-    gl_Position = projection * view * model * vec4(vec3(cameraPosition.x+position.x*10, height, cameraPosition.z+position.y*10), 1.0);
+    gl_Position = projection * view * model * vec4(vec3(cameraPosition.x+position.x*size, height*2, cameraPosition.z+position.y*size), 1.0);
     gl_PointSize = 10.0;
 }

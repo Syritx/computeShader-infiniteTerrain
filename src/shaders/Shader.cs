@@ -8,7 +8,7 @@ namespace perlin_noise_visualization.src.shaders {
 
     abstract class Shader {
 
-        public int VertexArrayObject, VertexBufferObject, Program;
+        public int VertexArrayObject, VertexBufferObject, IndexBufferArray, Program;
         int VertexShader, FragmentShader;
 
         public Shader(string VertexShaderPath, string FragmentShaderPath) {
